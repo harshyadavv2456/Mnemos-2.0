@@ -22,6 +22,7 @@ You must set these **once per Colab session** (or use Colab Secrets so they pers
 
 1. In Colab, click the **key icon** in the **left sidebar** (Secrets).
 2. Click **Add new secret** for each of the following. Use the **exact** name; value is your real secret.
+3. **Important:** For each secret, turn **ON** the **"Notebook access"** toggle so this notebook can read it (Colab does not inject secrets into the environment automatically; the notebook reads them via `userdata.get()`).
 
 | Secret name | Example / where to get it |
 |-------------|---------------------------|
