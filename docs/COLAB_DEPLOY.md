@@ -66,7 +66,7 @@ You must set these **once per Colab session** (or use Colab Secrets so they pers
 ## Open in Colab
 
 1. Open: **https://colab.research.google.com/github/harshyadavv2456/Mnemos-2.0/blob/main/colab_setup.ipynb**
-2. Add secrets (Colab Secrets or paste in Section 2 cell).
-3. **Runtime → Run all.** The last cell runs MNEMOS 24/7.
+2. **Runtime → Run all.** Section 1 installs deps; **Section 1.5 clones the repo** into `/content/Mnemos-2.0` (when you "Open in Colab" only the notebook is loaded—the clone step fetches the full project so `engine` and other modules are found). Then Section 2 sets path and secrets, Section 3 mounts Drive, Section 4 runs MNEMOS 24/7.
+3. Add secrets in Colab Secrets (key icon; enable "Notebook access" for each) or paste in Section 2.
 
-If the link fails, use **Method 2** in the same doc (clone the repo in Colab, then open `colab_setup.ipynb` from the cloned folder).
+If the Open in Colab link fails, clone manually in a cell: `!git clone https://github.com/harshyadavv2456/Mnemos-2.0.git /content/Mnemos-2.0` then run Section 2 and onward.
