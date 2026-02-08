@@ -1,0 +1,27 @@
+# MNEMOS 2.1 - Institutional-Grade Market Intelligence
+# Python 3.8+ required. Free-tier compatible.
+
+# Data
+yfinance>=0.2.36
+pandas>=2.0.0
+numpy>=1.24.0
+
+# News & RSS
+feedparser>=6.0.10
+requests>=2.31.0
+
+# Alerts
+python-telegram-bot>=20.7
+
+# Config & env
+python-dotenv>=1.0.0
+
+# Scheduling & resilience
+schedule>=1.2.0
+
+# Utilities
+tenacity>=8.2.0
+pytz>=2023.3
+
+# Optional: memory guardrail (watchdog)
+psutil>=5.9.0

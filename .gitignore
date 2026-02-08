@@ -1,0 +1,15 @@
+# MNEMOS 2.0 / 2.1 - never commit secrets or runtime data
+.env
+*.db
+data/
+logs/
+*.log
+reports/*.md
+reports/*.csv
+__pycache__/
+.venv/
+venv/
+*.pyc
+.Python
+.DS_Store
+.pytest_cache/
