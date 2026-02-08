@@ -27,7 +27,7 @@ gh repo create Mnemos-2.0 --private --source=. --remote=origin --push --descript
    git push -u origin main
    ```
 
-   Replace `YOUR_GITHUB_USERNAME` with your GitHub username. If GitHub asks for credentials, use a **Personal Access Token** (Settings → Developer settings → Personal access tokens) as the password.
+   Replace `YOUR_GITHUB_USERNAME` with your GitHub username. **This repo is already at:** `https://github.com/harshyadavv2456/Mnemos-2.0` If GitHub asks for credentials, use a **Personal Access Token** (Settings → Developer settings → Personal access tokens) as the password.
 
 ---
 
@@ -36,8 +36,8 @@ gh repo create Mnemos-2.0 --private --source=. --remote=origin --push --descript
 After the repo is on GitHub:
 
 1. **Open the notebook in Colab**
-   - Go to: **https://colab.research.google.com/github/YOUR_GITHUB_USERNAME/Mnemos-2.0/blob/main/colab_setup.ipynb**
-   - Replace `YOUR_GITHUB_USERNAME` with your GitHub username.
+   - Go to: **https://colab.research.google.com/github/harshyadavv2456/Mnemos-2.0/blob/main/colab_setup.ipynb**
+   - (Repo is private; log in with the GitHub account that has access.)
    - Or: GitHub repo page → open `colab_setup.ipynb` → click "Open in Colab" (if the button is shown).
 
 2. **Add your secrets (repo is private but .env is not in Git)**

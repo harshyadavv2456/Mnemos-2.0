@@ -17,10 +17,11 @@ Runs on free infrastructure (Google Colab); 150+ NSE stocks by market cap, confi
 
 ## Quick start (Google Colab)
 
-1. Upload the project to Colab (zip to `/content` and unzip, or clone).
-2. Open `colab_setup.ipynb` and run cells in order.
-3. Set **TELEGRAM_BOT_TOKEN**, **TELEGRAM_CHAT_ID**, **GMAIL_USER**, **GMAIL_APP_PASSWORD**, **ALERT_EMAIL_TO** in the env cell (or Colab Secrets).
-4. Run the last cell to start MNEMOS 24/7. Heartbeats in notebook; alerts and daily heartbeat to Telegram/Email.
+**[Open in Colab](https://colab.research.google.com/github/harshyadavv2456/Mnemos-2.0/blob/main/colab_setup.ipynb)** – one click to open the setup notebook (repo is private; you must be logged into the GitHub account that has access).
+
+1. Open the link above (or clone the repo and upload `colab_setup.ipynb` to Colab).
+2. Add your secrets: Colab Secrets (🔑 in sidebar) or paste in the env cell: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `ALERT_EMAIL_TO`, `GROQ_API_KEY`. Or upload your local `.env` and load it in the notebook.
+3. Run all cells. The last cell runs MNEMOS 24/7. Heartbeats in notebook; alerts and daily heartbeat to Telegram/Email.
 
 ## Where your input is needed
 
