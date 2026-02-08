@@ -121,7 +121,7 @@ SIGNAL_COOLDOWN_MINUTES = max(0, int(os.getenv("SIGNAL_COOLDOWN_MINUTES", "60"))
 ALERT_COOLDOWN_SYMBOL_MINUTES = max(0, int(os.getenv("ALERT_COOLDOWN_SYMBOL_MINUTES", "120")))
 
 # ----- Polling -----
-POLL_INTERVAL_MARKET_MIN = max(1, int(os.getenv("POLL_INTERVAL_MARKET_MIN", "3")))
+POLL_INTERVAL_MARKET_MIN = max(1, int(os.getenv("POLL_INTERVAL_MARKET_MIN", "2")))
 POLL_INTERVAL_OFF_MIN = max(5, int(os.getenv("POLL_INTERVAL_OFF_MIN", "30")))
 
 # ----- Market hours (IST) -----

@@ -5,7 +5,7 @@ Runs on free infrastructure (Google Colab); 150+ NSE stocks by market cap, confi
 
 ## What it does
 
-- **Monitors** 150+ NSE stocks (default watchlist by market cap); 3 min during market hours.
+- **Monitors** 150+ NSE stocks (default watchlist by market cap); **2 min** during market hours for near real-time.
 - **Detects friction**: panic selling, silent accumulation, sector lag, news underreaction/overreaction.
 - **Confidence engine**: Only alerts when friction + confidence exceed thresholds; uses liquidity, volatility, data quality, historical win rate.
 - **De-duplication**: Cooldown per symbol + signal type; severity escalation.
@@ -17,9 +17,9 @@ Runs on free infrastructure (Google Colab); 150+ NSE stocks by market cap, confi
 
 ## Quick start (Google Colab)
 
-**[Open in Colab](https://colab.research.google.com/github/harshyadavv2456/Mnemos-2.0/blob/main/colab_setup.ipynb)** – one click to open the setup notebook (repo is private; you must be logged into the GitHub account that has access).
+**[Open in Colab](https://colab.research.google.com/github/harshyadavv2456/Mnemos-2.0/blob/main/colab_setup.ipynb)** – one click to open the setup notebook (repo is public so Colab can load it; secrets stay in Colab Secrets or .env, never in the repo).
 
-1. Open the link above (or clone the repo and upload `colab_setup.ipynb` to Colab).
+1. Open the link above. If you see "Notebook not found", use the **Clone & run** method in [docs/COLAB_DEPLOY.md](docs/COLAB_DEPLOY.md) instead.
 2. Add your secrets: Colab Secrets (🔑 in sidebar) or paste in the env cell: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `ALERT_EMAIL_TO`, `GROQ_API_KEY`. Or upload your local `.env` and load it in the notebook.
 3. Run all cells. The last cell runs MNEMOS 24/7. Heartbeats in notebook; alerts and daily heartbeat to Telegram/Email.
 
