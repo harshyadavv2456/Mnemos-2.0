@@ -1,55 +1,71 @@
-# Colab deployment – always working
+# Colab deployment – step-by-step (secure, 24/7)
 
-## Why "Notebook not found" happened
+## How 24/7 automated works
 
-Colab **cannot open notebooks from private GitHub repos**. The "Open in Colab" link uses GitHub’s public API, which returns 404 for private repos.
-
-**Fix applied:** The repo **Mnemos-2.0** is now **public**. No secrets are in the repo (`.env` is gitignored). Use Colab Secrets or upload `.env` for credentials.
-
----
-
-## Method 1: Open in Colab (use this first)
-
-1. Open: **https://colab.research.google.com/github/harshyadavv2456/Mnemos-2.0/blob/main/colab_setup.ipynb**
-2. Add your secrets in the env cell or in Colab Secrets (🔑).
-3. **Runtime → Run all.** The last cell runs MNEMOS 24/7 (2 min polling in market hours).
+1. You open the notebook and **Run all** cells.
+2. The **last cell** runs `run_forever()`: a loop that every **2 min** (market hours) or 30 min (off hours):
+   - Fetches NSE + indices + Gold/Silver data
+   - Computes friction and confidence
+   - Sends alerts to Telegram and Email (and GROQ analysis when enabled)
+   - Logs heartbeats, backs up DB to Drive
+3. That loop runs **continuously** until you click **Runtime → Interrupt execution** or until Colab disconnects (free tier often ~90 min idle).
+4. **When Colab disconnects:** The loop stops. To run 24/7 again: re-open the same notebook link and click **Runtime → Run all**. No code changes needed.
+5. **Keepalive:** Keep the browser tab active, or add a cell with `%%javascript` and run it every ~60 min: `document.querySelector('.colab-connect-button')?.click();`
 
 ---
 
-## Method 2: Clone and run (if the link still fails)
+## Add secrets (required – all secure, never in the repo)
 
-1. Go to **https://colab.research.google.com** and create a **New notebook**.
-2. In the first cell, run:
+You must set these **once per Colab session** (or use Colab Secrets so they persist for the session). No secrets are stored in the GitHub repo.
+
+### Option A – Colab Secrets (recommended)
+
+1. In Colab, click the **key icon** in the **left sidebar** (Secrets).
+2. Click **Add new secret** for each of the following. Use the **exact** name; value is your real secret.
+
+| Secret name | Example / where to get it |
+|-------------|---------------------------|
+| `TELEGRAM_BOT_TOKEN` | From @BotFather on Telegram (e.g. `123456:ABC-...`) |
+| `TELEGRAM_CHAT_ID` | From @userinfobot on Telegram – send any message, copy your numeric Id (e.g. `7997663618`) |
+| `GMAIL_USER` | Your Gmail address (e.g. `you@gmail.com`) |
+| `GMAIL_APP_PASSWORD` | Google Account → Security → 2-Step Verification → App passwords → generate for “Mail” – 16 characters, **not** your normal password |
+| `ALERT_EMAIL_TO` | Same as GMAIL_USER, or comma-separated for mail trail: `a@gmail.com,b@gmail.com` |
+| `GROQ_API_KEY` | From console.groq.com (free tier key) |
+
+3. The notebook code reads these automatically. Do **not** paste secrets in the notebook when using Secrets.
+
+### Option B – Paste in the env cell
+
+1. In the notebook, find the cell **“## 2. Set project path and secrets”**.
+2. The code already has `os.environ.setdefault('TELEGRAM_BOT_TOKEN', os.environ.get('TELEGRAM_BOT_TOKEN', ''))` etc. Colab Secrets override the empty string. If you **don’t** use Secrets, you can set variables explicitly **before** that block, for example:
 
    ```python
-   !git clone https://github.com/harshyadavv2456/Mnemos-2.0.git
-   %cd Mnemos-2.0
+   os.environ['TELEGRAM_BOT_TOKEN'] = 'your_bot_token_here'
+   os.environ['TELEGRAM_CHAT_ID']   = '7997663618'
+   os.environ['GMAIL_USER']         = 'your_email@gmail.com'
+   os.environ['GMAIL_APP_PASSWORD'] = 'your_16_char_app_password'
+   os.environ['ALERT_EMAIL_TO']     = 'you@gmail.com,other@gmail.com'
+   os.environ['GROQ_API_KEY']       = 'your_groq_key'
    ```
 
-3. **File → Open notebook** → open `Mnemos-2.0/colab_setup.ipynb` from the file browser on the left.  
-   Or copy the contents of `colab_setup.ipynb` from the repo into your notebook.
-4. Run all cells of the setup notebook (install deps, set env, mount Drive, run MNEMOS).
+3. **Do not** commit or share the notebook after pasting real values. Prefer Colab Secrets.
 
 ---
 
-## Keep it running (always live)
+## Security (Telegram, Gmail, APIs)
 
-- **Polling:** Market hours = **2 min**; off hours = 30 min (configurable via env).
-- **Session:** Free Colab can disconnect after ~90 min idle. To reduce disconnects:
-  - Keep the browser tab active.
-  - Optional: add a new cell with `%%javascript` and run it every ~60 min:  
-    `document.querySelector('.colab-connect-button')?.click();`
-- **After disconnect:** Re-open the Colab link (or your cloned notebook) and run **Run all** again. MNEMOS does not auto-reconnect; you need to re-run the notebook once per new session.
+- **Repo:** No tokens or passwords are in the GitHub repo. `.env` is gitignored; the notebook only has placeholders or reads from Colab Secrets.
+- **Colab:** Secrets are stored in Colab’s secret store (tied to your Google account) and injected into the runtime. Don’t share your Colab notebook if you pasted secrets in the cell.
+- **Telegram:** Use a bot token from @BotFather and your chat ID from @userinfobot. Don’t share the token.
+- **Gmail:** Use an **App Password**, not your main password. You can revoke it anytime in Google Account → Security → App passwords.
+- **GROQ:** Use a key from console.groq.com; free tier has rate limits. Rotate the key if it’s ever exposed.
 
 ---
 
-## Secrets (never in the repo)
+## Open in Colab
 
-Set these in Colab Secrets or in the env cell (or upload `.env` and load it):
+1. Open: **https://colab.research.google.com/github/harshyadavv2456/Mnemos-2.0/blob/main/colab_setup.ipynb**
+2. Add secrets (Colab Secrets or paste in Section 2 cell).
+3. **Runtime → Run all.** The last cell runs MNEMOS 24/7.
 
-- `TELEGRAM_BOT_TOKEN`
-- `TELEGRAM_CHAT_ID`
-- `GMAIL_USER`
-- `GMAIL_APP_PASSWORD`
-- `ALERT_EMAIL_TO` (comma-separated for mail trail)
-- `GROQ_API_KEY`
+If the link fails, use **Method 2** in the same doc (clone the repo in Colab, then open `colab_setup.ipynb` from the cloned folder).
